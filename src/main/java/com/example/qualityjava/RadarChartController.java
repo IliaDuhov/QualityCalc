@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "https://qualitycalc-production.up.railway.app")
+@CrossOrigin(origins = "*")
 public class RadarChartController {
 
     @PostMapping("/radar-chart")
