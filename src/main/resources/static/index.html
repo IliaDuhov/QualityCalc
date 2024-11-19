@@ -6,116 +6,130 @@
     <title>Radar Chart</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0e6d6; /* Светло-бежевый фон */
-            color: #4a4a4a; /* Тёмно-серый текст */
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7e8d5;
+}
 
-        h1 {
-            color: #33475b; /* Тёмно-серо-синий */
-            text-align: center;
-            margin-bottom: 25px;
-        }
+h1 {
+    color: #33475b; /* Тёмно-серо-синий */
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        .accordion {
-            background-color: #5a6e73; /* Мягкий серо-синий */
-            color: #ffffff;
-            cursor: pointer;
-            padding: 12px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 17px;
-            font-weight: bold;
-            margin: 15px 0;
-            border-radius: 6px;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.panel h2 {
+    font-size: 16px; /* Уменьшение размера заголовков */
+    margin-bottom: 10px;
+    text-align: center; /* Центровка заголовка панели */
+}
+.panel h3 {
+    margin-top: 0; /* Убираем лишний отступ сверху */
+}
 
-        .accordion:hover {
-            background-color: #4a5a60; /* Темнее при наведении */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-        }
+.panel input {
+    width: auto; /* Убираем фиксированную ширину для полей ввода */
+}
 
-        .panel {
-            display: none;
-            background-color: #ffffff;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-        }
+.block {
+    background-color: #5a6e73; /* Мягкий серо-синий */
+    color: #ffffff;
+    padding: 12px;
+    width: calc(33% - 20px); /* Задает ширину блоков, оставляя отступы */
+    margin: 10px; /* Отступ вокруг каждого блока */
+    border-radius: 6px;
+    box-sizing: border-box; /* Учитывает отступы и границы в ширине */
+}
 
-        .input-group, .formula-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
+.panel {
+    flex: 1 1 300px;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    word-wrap: break-word; /* Перенос слов на новую строку */
+    overflow: hidden; /* Предотвращение выхода текста за границы */
+    font-size: 14px; /* Уменьшение размера шрифта для текста */
+    line-height: 1.5; /* Межстрочный интервал для удобства чтения */
+    text-align: left; /* Выравнивание текста по левому краю */
+}
 
-        label {
-            margin-right: 10px;
-            font-weight: 600;
-            color: #4a4a4a;
-        }
+.panel input[type="text"],
+.panel input[type="number"] {
+    width: 100%; /* Полная ширина для всех полей ввода */
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 14px;
+}
 
-        input[type="number"] {
-            padding: 8px;
-            margin-right: 8px;
-            width: 70px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
+.input-group, .formula-group {
+    display: flex; /* Убедитесь, что элементы располагаются в линию */
+    align-items: center; /* Выравнивание по центру по вертикали для группы ввода и формулы */
+    margin-bottom: 12px;
+}
 
-        input[type="number"]:focus {
-            border-color: #5a6e73;
-            box-shadow: 0px 0px 4px #5a6e73;
-            outline: none;
-        }
+label {
+    margin-right: 10px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
 
-        h3 {
-            color: #33475b;
-            margin-bottom: 8px;
-        }
+input[type="number"] {
+    padding: 8px;
+    margin-right: 8px;
+    width: 70px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
 
-        .button-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
+input[type="number"]:focus {
+    border-color: #5a6e73;
+    box-shadow: 0px 0px 4px #5a6e73;
+    outline: none;
+}
 
-        button {
-            background-color: #b29061; /* Тёплый бежево-коричневый */
-            color: #ffffff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
+.button-container {
+    display: flex; /* Убедитесь, что кнопки располагаются в линию */
+    gap: 10px; /* Отступ между кнопками */
+    margin-top: 20px;
+}
 
-        button:hover {
-            background-color: #967048; /* Темнее при наведении */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #d2a47e;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
 
-        #radarChart {
-            display: none;
-            margin-top: 20px;
-            max-width: 100%;
-            border: 1px solid #33475b; /* Цвет рамки */
-            border-radius: 8px;
-        }
+button:hover {
+    background-color: #b07d5a;
+}
+
+
+
     </style>
 </head>
 <body>
 
-<h1>Качесвто программного обеспечения</h1>
+<h1>Качество программного обеспечения</h1>
+<div class="container">
+
+
 
 <!-- Основные параметры -->
 <button class="accordion">Начальные и минимальные значения</button>
@@ -196,8 +210,10 @@
     <button onclick="deleteChart()">Удалить график</button>
 </div>
 
+<br>
 <!-- Место для отображения диаграммы (по умолчанию скрыто) -->
 <img id="radarChart" alt="Radar Chart" style="display:none; margin-top: 20px;">
+</div>
 
 <script>
     const defaultValues = {
@@ -590,13 +606,9 @@
 
     // Аккордеон для раскрытия панелей
     function setupAccordion() {
-        const accordions = document.getElementsByClassName('accordion');
-        for (let i = 0; i < accordions.length; i++) {
-            accordions[i].addEventListener('click', function() {
-                this.classList.toggle('active');
-                const panel = this.nextElementSibling;
-                panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-            });
+    const accordions = document.getElementsByClassName('accordion');
+    for (let i = 0; i < accordions.length; i++) {
+        accordions[i].style.display = 'none'; // Скрываем кнопки аккордеона
         }
     }
 	
