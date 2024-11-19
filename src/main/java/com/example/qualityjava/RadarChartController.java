@@ -82,7 +82,7 @@ public class RadarChartController {
             plot.setSeriesPaint(0, Color.BLUE); // Цвет для метрик (основные данные)
             plot.setSeriesPaint(1, Color.RED);  // Цвет для минимальных значений
 
-            JFreeChart chart = new JFreeChart("Качество программного обеспечения t = " + key, JFreeChart.DEFAULT_TITLE_FONT, plot, false);
+            JFreeChart chart = new JFreeChart("" + key, JFreeChart.DEFAULT_TITLE_FONT, plot, false);
             chart.setBackgroundPaint(Color.white);
 
             // Создание изображения диаграммы
