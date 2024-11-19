@@ -47,7 +47,7 @@ public class RadarChartController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Если длины не равны 15, возвращаем ошибку
         }
 
-        Map<Double, List<Double>> calculatedMetrics = calc.calculateMetrics(action);
+        Map<Double, List<Double>> calculatedMetrics = calc.calculateMetrics("mode1");
 
         System.out.println(calculatedMetrics);
 
