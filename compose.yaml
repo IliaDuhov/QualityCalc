@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - ${PORT_APP}:8080
+      - 8080:8080
     networks:
       - dock_net
 networks:
