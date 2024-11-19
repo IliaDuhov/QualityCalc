@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radar Chart</title>
+    <title>NPZ</title>
     <style>
         body {
     font-family: Arial, sans-serif;
@@ -126,7 +126,7 @@ button:hover {
 </head>
 <body>
 
-<h1>Качество программного обеспечения</h1>
+<h1>Нефтеперерабатывающие предприятие</h1>
 <div class="container">
 
     <div>
@@ -135,88 +135,88 @@ button:hover {
 
     </div>
 
-<!-- Основные параметры -->
-<button class="accordion">Начальные и минимальные значения</button>
-<div class="panel" id="metricsFields"></div>
+    <!-- Основные параметры -->
+    <button class="accordion">Начальные и минимальные значения</button>
+    <div class="panel" id="metricsFields"></div>
 
-<!-- Ввод возмущений -->
-<button class="accordion">Возмущения</button>
-<div class="panel">
-    <h3>Ввод коэффициентов для возмущений:</h3>
+    <!-- Ввод возмущений -->
+    <button class="accordion">Возмущения</button>
+    <div class="panel">
+        <h3>Ввод коэффициентов для возмущений:</h3>
 
-    <div class="formula-group">
-        <label>Опыт разработчиков программного комплекса (q1):</label>
-        <span>y =</span>
-        <input type="number" id="q1_a" placeholder="a" value="1">
-        <span>+</span>
-        <input type="number" id="q1_b" placeholder="b" value="2">
-        <span>sin(</span>
-        <input type="number" id="q1_c" placeholder="c" value="3">
-        <span>x +</span>
-        <input type="number" id="q1_d" placeholder="d" value="4">
-        <span>)</span>
+        <div class="formula-group">
+            <label>Опыт разработчиков программного комплекса (q1):</label>
+            <span>y =</span>
+            <input type="number" id="q1_a" placeholder="a" value="1">
+            <span>+</span>
+            <input type="number" id="q1_b" placeholder="b" value="2">
+            <span>sin(</span>
+            <input type="number" id="q1_c" placeholder="c" value="3">
+            <span>x +</span>
+            <input type="number" id="q1_d" placeholder="d" value="4">
+            <span>)</span>
+        </div>
+
+        <div class="formula-group">
+            <label>Опыт работы эксплуатационного персонала(q2):</label>
+            <span>y =</span>
+            <input type="number" id="q2_a" placeholder="a" value="1">
+            <span>+</span>
+            <input type="number" id="q2_b" placeholder="b" value="2">
+            <span>sin(</span>
+            <input type="number" id="q2_c" placeholder="c" value="3">
+            <span>x +</span>
+            <input type="number" id="q2_d" placeholder="d" value="4">
+            <span>)</span>
+        </div>
+
+        <div class="formula-group">
+            <label>Трудоемкость разработки программного обеспечения (q3):</label>
+            <span>y =</span>
+            <input type="number" id="q3_a" placeholder="a" value="1">
+            <span>x^0.5 +</span>
+            <input type="number" id="q3_b" placeholder="b" value="2">
+        </div>
+
+        <div class="formula-group">
+            <label>Деловая репутация разработчиков программного комплекса (q4):</label>
+            <span>y =</span>
+            <input type="number" id="q4_a" placeholder="a" value="1">
+            <span>+</span>
+            <input type="number" id="q4_b" placeholder="b" value="2">
+            <span>step(</span>
+            <input type="number" id="q4_c" placeholder="c" value="3">
+            <span>)</span>
+        </div>
+
+        <div class="formula-group">
+            <label>Деловая репутация организации, в которой осуществляется эксплуатация программного комплекса (q5):</label>
+            <span>y =</span>
+            <input type="number" id="q5_a" placeholder="a" value="1">
+            <span>x^0.5 +</span>
+            <input type="number" id="q5_b" placeholder="b" value="2">
+        </div>
     </div>
 
-    <div class="formula-group">
-        <label>Опыт работы эксплуатационного персонала(q2):</label>
-        <span>y =</span>
-        <input type="number" id="q2_a" placeholder="a" value="1">
-        <span>+</span>
-        <input type="number" id="q2_b" placeholder="b" value="2">
-        <span>sin(</span>
-        <input type="number" id="q2_c" placeholder="c" value="3">
-        <span>x +</span>
-        <input type="number" id="q2_d" placeholder="d" value="4">
-        <span>)</span>
+    <button class="accordion">Максимальные значения уровня функциональных возможностей (L*)</button>
+    <div class="panel" id="maxFunc"></div>
+
+    <!-- Новый аккордеон для набора строк с a0, a1, a2, a3 -->
+    <button class="accordion">Полиномы</button>
+    <div class="panel" id="additionalRows"></div>
+
+    <!-- Кнопки управления -->
+    <div style="margin-top: 20px;">
+        <button onclick="generateChart()">Сгенерировать диаграмму</button>
+        <button onclick="resetDefaults()">Сбросить</button>
+        <button onclick="clearInputs()">Очистить</button>
+        <button onclick="exportChart()">Экспортировать график</button>
+        <button onclick="deleteChart()">Удалить график</button>
     </div>
 
-    <div class="formula-group">
-        <label>Трудоемкость разработки программного обеспечения (q3):</label>
-        <span>y =</span>
-        <input type="number" id="q3_a" placeholder="a" value="1">
-        <span>x^0.5 +</span>
-        <input type="number" id="q3_b" placeholder="b" value="2">
-    </div>
-
-    <div class="formula-group">
-        <label>Деловая репутация разработчиков программного комплекса (q4):</label>
-        <span>y =</span>
-        <input type="number" id="q4_a" placeholder="a" value="1">
-        <span>+</span>
-        <input type="number" id="q4_b" placeholder="b" value="2">
-        <span>step(</span>
-        <input type="number" id="q4_c" placeholder="c" value="3">
-        <span>)</span>
-    </div>
-
-    <div class="formula-group">
-        <label>Деловая репутация организации, в которой осуществляется эксплуатация программного комплекса (q5):</label>
-        <span>y =</span>
-        <input type="number" id="q5_a" placeholder="a" value="1">
-        <span>x^0.5 +</span>
-        <input type="number" id="q5_b" placeholder="b" value="2">
-    </div>
-</div>
-
-<button class="accordion">Максимальные значения уровня функциональных возможностей (L*)</button>
-<div class="panel" id="maxFunc"></div>
-
-<!-- Новый аккордеон для набора строк с a0, a1, a2, a3 -->
-<button class="accordion">Полиномы</button>
-<div class="panel" id="additionalRows"></div>
-
-<!-- Кнопки управления -->
-<div style="margin-top: 20px;">
-    <button onclick="generateChart()">Сгенерировать диаграмму</button>
-    <button onclick="resetDefaults()">Сбросить</button>
-    <button onclick="clearInputs()">Очистить</button>
-    <button onclick="exportChart()">Экспортировать график</button>
-    <button onclick="deleteChart()">Удалить график</button>
-</div>
-
-<br>
-<!-- Место для отображения диаграммы (по умолчанию скрыто) -->
-<img id="radarChart" alt="Radar Chart" style="display:none; margin-top: 20px;">
+    <br>
+    <!-- Место для отображения диаграммы (по умолчанию скрыто) -->
+    <img id="radarChart" alt="Radar Chart" style="display:none; margin-top: 20px;">
 </div>
 
 <script>
@@ -266,7 +266,7 @@ button:hover {
 			f31: { a0: 9, a1: 5, a2: 5, a3: 7 },
 			f32: { a0: 8, a1: 8, a2: 4, a3: 6 },
 			f33: { a0: 8, a1: 8, a2: 3, a3: 9 },
-			f34: { a0: 6, a1: 9, a2: 2, a3: 7 },	
+			f34: { a0: 6, a1: 9, a2: 2, a3: 7 },
 			f35: { a0: 6, a1: 7, a2: 4, a3: 9 },
 			f36: { a0: 1, a1: 2, a2: 5, a3: 6 },
 			f37: { a0: 5, a1: 2, a2: 6, a3: 8 },
@@ -373,7 +373,7 @@ button:hover {
             metricsFields.appendChild(div);
         });
     }
-	
+
 	// Генерация строк с коэффициентами (a0, a1, a2, a3)
     function generateAdditionalRows() {
         const additionalRows = document.getElementById('additionalRows');
@@ -382,7 +382,7 @@ button:hover {
         for (let i = 1; i <= 98; i++) {
 			const div = document.createElement('div');
 			div.className = 'input-group';
-			
+
 			// Доступ к значениям из additionalRows[f{i}]
 			const a0 = defaultValues.additionalRows[`f${i}`].a0;
 			const a1 = defaultValues.additionalRows[`f${i}`].a1;
@@ -401,11 +401,11 @@ button:hover {
 		}
 
     }
-	
+
 	function generateMaxFunc() {
 		const maxFuncs = document.getElementById('maxFunc');
         maxFuncs.innerHTML = ''; // Очищаем поле
-		
+
 		metricsList.forEach((metric, index) => {
             const div = document.createElement('div');
             div.className = 'metric-container';
@@ -420,7 +420,7 @@ button:hover {
             maxFuncs.appendChild(div);
         });
 	}
-	
+
 
     // Инициализация при загрузке страницы
     window.onload = function() {
@@ -442,10 +442,6 @@ button:hover {
         defaultValues.action = currentMode === 1 ? 'mode1' : 'mode2'; // Обновляем действие в JSON
     }
 
-    function navigateToLab2() {
-        window.location.href = "lab2.html"; // Указываем путь к целевой странице
-    }
-
     // Генерация диаграммы
     function generateChart() {
         const metrics = [];
@@ -458,7 +454,7 @@ button:hover {
             minMetrics.push(document.getElementById(`minMetric${i}`).value);
 			maxFuncs.push(document.getElementById(`maxFunc${i}`).value);
         }
-		
+
 
         // Собираем значения для возмущений
         const disturbances = {
@@ -488,7 +484,7 @@ button:hover {
                 b: document.getElementById('q5_b').value
             }
         };
-		
+
 		const additionalRows = {};
 		for (let i = 1; i <= 98; i++) {
 			additionalRows[`f${i - 1}`] = {
@@ -498,7 +494,7 @@ button:hover {
 				a3: document.getElementById(`a3_row${i}`).value
 			};
 		}
-					
+
 		const metricsName = metricsList.map((metric, index) => (
 			metric.name
 		));
@@ -519,7 +515,7 @@ button:hover {
 
 
         // Отправляем запрос на сервер
-        fetch('https://qualitycalc-2l3u.onrender.com/radar-chart', {
+        fetch('https://qualitycalc-2l3u.onrender.com/npz-chart', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -562,7 +558,7 @@ button:hover {
 
         document.getElementById('q5_a').value = defaultValues.disturbances.q5.a;
         document.getElementById('q5_b').value = defaultValues.disturbances.q5.b;
-		
+
 		// Сбрасываем доп. строки
         for (let i = 1; i <= 98; i++) {
             document.getElementById(`a0_row${i}`).value = defaultValues.additionalRows[`f${i}`].a0;
@@ -599,7 +595,7 @@ button:hover {
 
         document.getElementById('q5_a').value = '';
         document.getElementById('q5_b').value = '';
-		
+
 		// Очищаем доп. строки
         for (let i = 1; i <= 98; i++) {
             document.getElementById(`a0_row${i}`).value = '';
@@ -633,7 +629,8 @@ button:hover {
         }
     }
 
-	function togglePage() {
+
+    function togglePage() {
         // Получаем текущий URL
         const currentPage = window.location.pathname;
 
@@ -647,8 +644,9 @@ button:hover {
         }
     }
 
+
 	function deleteChart() {
-		document.getElementById('radarChart').style.display = 'none'; 
+		document.getElementById('radarChart').style.display = 'none';
 	}
 </script>
 
