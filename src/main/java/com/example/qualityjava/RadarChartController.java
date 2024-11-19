@@ -32,6 +32,7 @@ public class RadarChartController {
             @RequestBody RadarChartRequest params
     ) throws IOException {
 
+        String action = params.getAction();
         List<Double> metrics = params.getMetrics();
         List<String> metricsName = params.getMetricsName();
         List<Double> minMetrics = params.getMinMetrics();
@@ -46,7 +47,7 @@ public class RadarChartController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Если длины не равны 15, возвращаем ошибку
         }
 
-        Map<Double, List<Double>> calculatedMetrics = calc.calculateMetrics();
+        Map<Double, List<Double>> calculatedMetrics = calc.calculateMetrics(action);
 
         System.out.println(calculatedMetrics);
 

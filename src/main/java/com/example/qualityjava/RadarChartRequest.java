@@ -8,6 +8,7 @@ public class RadarChartRequest {
     private List<String> metricsName;
     private List<Double> minMetrics;
     private List<Integer> maxFuncs;
+    private String action;
     private Map<String, Map<String, Double>> disturbances;
     private Map<String, Map<String, Double>> additionalRows;
 
@@ -53,6 +54,14 @@ public class RadarChartRequest {
 
     public List<Integer> getMaxFuncs() {
         return maxFuncs;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public void setMaxFuncs(List<Integer> maxFuncs) {

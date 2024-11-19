@@ -148,14 +148,80 @@ public class Calculation {
                 (q1(t) + q2(t) + q5(t)) - q3(t));
     }
 
+    public double g1(double t) {
+        return -1 / Lmax(1) * (f(1, 10) * f(2, 11) * f(3, 14));
+    }
+
+    public double g2(double t) {
+        return 1 / Lmax(2) * (f(4, 3) * f(5, 7) * f(6, 8) * f(7, 9) * f(8, 13) - (f(9, 10) * f(10, 11) * f(11, 14) * f(12, 15) * q1(t) + q2(t) + q3(t) + q4(t)));
+    }
+
+    public double g3(double t) {
+        return 1 / Lmax(3) * (f(13, 1) - (f(14, 15) * q1(t) + q3(t) + q4(t)));
+    }
+
+    public double g4(double t) {
+        return 1 / Lmax(4) * f(15, 1);
+    }
+
+    public double g5(double t) {
+        return 1 / Lmax(5) * (f(16, 1) * q2(t) - q1(t));
+    }
+
+    public double g6(double t) {
+        return 1 / Lmax(6) * (q2(t) - (f(17, 4) * f(18, 11) * f(19, 12) * f(20, 14) * q1(t)));
+    }
+
+    public double g7(double t) {
+        return 1 / Lmax(7) * (f(21, 5) * f(22, 6) * f(23, 13) * f(24, 15) * q1(t) + q2(t) + q3(t));
+    }
+
+    public double g8(double t) {
+        return 1 / Lmax(8) * (f(25, 5) * f(26, 6) * f(27, 11) * f(28, 13) * f(29, 14) * f(30, 15) * q1(t) + q2(t) + q3(t));
+    }
+
+    public double g9(double t) {
+        return 1 / Lmax(9) * (f(31, 3) * f(32, 13) * q2(t) - (f(33, 10) * f(34, 11) * f(35, 14) * q1(t)));
+    }
+
+    public double g10(double t) {
+        return 1 / Lmax(10) * (f(36, 3) * f(37, 9) * f(38, 15) * q1(t) + q2(t) + q3(t) + q4(t));
+    }
+
+    public double g11(double t) {
+        return 1 / Lmax(11) * (f(39, 3) * f(40, 13) * f(41, 14) * q1(t) + q2(t) + q3(t) - (f(42, 15) * q4(t)));
+    }
+
+    public double g12(double t) {
+        return 1 / Lmax(12) * (f(43, 11) * f(44, 13) * f(45, 14) * q1(t) + q2(t) + q3(t) - f(46, 15));
+    }
+
+    public double g13(double t) {
+        return 1 / Lmax(13) * (f(47, 2) * f(48, 3) * q2(t));
+    }
+
+    public double g14(double t) {
+        return 1 / Lmax(14) * (f(49, 11) * f(50, 12) * f(51, 13) * q1(t) + q2(t));
+    }
+
+    public double g15(double t) {
+        return 1 / Lmax(15) * (f(52, 2) * f(53, 3) * f(54, 13) * f(55, 14) * q1(t) + q2(t));
+    }
+
     public List<Double> getListByT(double t) {
         return Arrays.asList(l1(t), l2(t), l3(t), l4(t), l5(t), l6(t), l7(t), l8(t), l9(t), l10(t), l11(t), l12(t), l13(t), l14(t), l15(t));
     }
 
-    public Map<Double, List<Double>> calculateMetrics() {
+    public List<Double> getSecondListByT(double t) {
+        return Arrays.asList(g1(t), g2(t), g3(t), g4(t), g5(t), g6(t), g7(t), g8(t), g9(t), g10(t), g11(t), g12(t), g13(t), g14(t), g15(t));
+    }
+
+    public Map<Double, List<Double>> calculateMetrics(String action) {
         Map<Double, List<Double>> map = new HashMap<>();
         for (double i = 0; i <= 1; i += 0.25) {
-            map.put(i, getListByT(i));
+            if (action.equals("mode1")) {
+                map.put(i, getListByT(i));
+            } else map.put(i, getSecondListByT(i));
         }
         return normalize(map);
     }

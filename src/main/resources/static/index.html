@@ -129,7 +129,10 @@ button:hover {
 <h1>Качество программного обеспечения</h1>
 <div class="container">
 
-
+    <div>
+        <button style="margin: 10px 0" id="toggleModeBtn" onclick="toggleModes()">Переключить на Режим 2</button>
+        <div id="modeDisplay">Текущий режим: Режим 1</div>
+    </div>
 
 <!-- Основные параметры -->
 <button class="accordion">Начальные и минимальные значения</button>
@@ -220,6 +223,7 @@ button:hover {
         metrics: [0.7, 0.3, 0.4, 0.5, 0.7, 0.8, 0.4, 0.4, 0.4, 0.6, 0.8, 0.8, 0.5, 0.6, 0.3], // Значения по умолчанию для всех метрик
         minMetrics: [0.2, 0.25, 0.35, 0.2, 0.2, 0.25, 0.2, 0.25, 0.2, 0.15, 0.25, 0.15, 0.4, 0.15, 0.35],
 		maxFunc: [3, 4, 5, 5, 3, 5, 4, 5, 5, 4, 7, 3, 6, 3, 4],
+        action: 'mode1',
         disturbances: {
             q1: { a: 0.5, b: 1, c: 2, d: 0 },
             q2: { a: 0.3, b: 0.8, c: 2, d: 0.75 },
@@ -426,6 +430,17 @@ button:hover {
         setupAccordion();
     };
 
+    // Переменная для хранения текущего режима
+    let currentMode = 1;
+
+    // Функция для переключения режимов
+    function toggleModes() {
+        currentMode = currentMode === 1 ? 2 : 1; // Переключаемся между 1 и 2
+        document.getElementById('modeDisplay').innerText = `Текущий режим: Режим ${currentMode}`;
+        document.getElementById('toggleModeBtn').innerText = `Переключить на Режим ${currentMode === 1 ? 2 : 1}`;
+        defaultValues.action = currentMode === 1 ? 'mode1' : 'mode2'; // Обновляем действие в JSON
+    }
+
     // Генерация диаграммы
     function generateChart() {
         const metrics = [];
@@ -493,12 +508,13 @@ button:hover {
 			minMetrics: minMetrics,
 			maxFuncs: maxFuncs,
 			disturbances: disturbances,
-			additionalRows: additionalRows
+			additionalRows: additionalRows,
+            action: defaultValues.action // Добавляем действие в JSON
 		};
 
 
         // Отправляем запрос на сервер
-        fetch('https://qualitycalc-production-7cb1.up.railway.app/radar-chart', {
+        fetch('http://localhost:8080/radar-chart', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
