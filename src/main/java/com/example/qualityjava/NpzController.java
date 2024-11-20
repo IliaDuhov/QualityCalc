@@ -45,7 +45,7 @@ public class NpzController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Если длины не равны 15, возвращаем ошибку
         }
 
-        Map<Double, List<Double>> calculatedMetrics = calc.calculateMetrics("mode2");
+        Map<Double, List<Double>> calculatedMetrics = calc.calculateMetrics(action);
 
         System.out.println(calculatedMetrics);
 
