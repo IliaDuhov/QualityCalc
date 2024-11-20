@@ -86,7 +86,7 @@ public class NpzController {
 //            // Создание изображения диаграммы
 //            BufferedImage chartImage = chart.createBufferedImage(chartWidth, chartHeight);
 //            g2d.drawImage(chartImage, 0, y, null);
-//            y += chartHeight;  // Смещаемся на следующую строку для новой диаграммы
+//            y += chartHeight;  // Смещаемся на следующую строку для новой диаграмм
         }
 
         // Создаем линейный график для значений Li от t
