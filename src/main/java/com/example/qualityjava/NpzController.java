@@ -61,33 +61,33 @@ public class NpzController {
         int y = 0;
 
         // Генерация каждой диаграммы и рисование ее на итоговом изображении
-//        for (Map.Entry<Double, List<Double>> entry : calculatedMetrics.entrySet()) {
-//            Double key = entry.getKey();
-//            List<Double> values = entry.getValue();
-//
-//            // Создание набора данных для каждой диаграммы
-//            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//
-//            for (int i = 0; i < values.size(); i++) {
-//                dataset.addValue(values.get(i), "Metrics", "L" + (i + 1));
-//                dataset.addValue(minMetrics.get(i), "Minimums", "L" + (i + 1));
-//            }
-//
-//            // Создание паутинной диаграммы для текущего ключа
-//            CustomSpiderWebPlot plot = new CustomSpiderWebPlot(dataset);
-//            plot.setMaxValue(1.0);  // Устанавливаем максимум для шкалы
-//
-//            plot.setSeriesPaint(0, Color.BLUE); // Цвет для метрик (основные данные)
-//            plot.setSeriesPaint(1, Color.RED);  // Цвет для минимальных значений
-//
+        for (Map.Entry<Double, List<Double>> entry : calculatedMetrics.entrySet()) {
+            Double key = entry.getKey();
+            List<Double> values = entry.getValue();
+
+            // Создание набора данных для каждой диаграммы
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            for (int i = 0; i < values.size(); i++) {
+                dataset.addValue(values.get(i), "Metrics", "L" + (i + 1));
+                dataset.addValue(minMetrics.get(i), "Minimums", "L" + (i + 1));
+            }
+
+            // Создание паутинной диаграммы для текущего ключа
+            CustomSpiderWebPlot plot = new CustomSpiderWebPlot(dataset);
+            plot.setMaxValue(1.0);  // Устанавливаем максимум для шкалы
+
+            plot.setSeriesPaint(0, Color.BLUE); // Цвет для метрик (основные данные)
+            plot.setSeriesPaint(1, Color.RED);  // Цвет для минимальных значений
+
 //            JFreeChart chart = new JFreeChart("Качество программного обеспечения t = " + key, JFreeChart.DEFAULT_TITLE_FONT, plot, false);
 //            chart.setBackgroundPaint(Color.white);
 //
 //            // Создание изображения диаграммы
 //            BufferedImage chartImage = chart.createBufferedImage(chartWidth, chartHeight);
 //            g2d.drawImage(chartImage, 0, y, null);
-//            y += chartHeight;  // Смещаемся на следующую строку для новой диаграм
-//        }
+//            y += chartHeight;  // Смещаемся на следующую строку для новой диаграммы
+        }
 
         // Создаем линейный график для значений Li от t
         DefaultCategoryDataset lineDataset = new DefaultCategoryDataset();
